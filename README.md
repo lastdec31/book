@@ -10,3 +10,6 @@ Currently, two official plugins are available:
 
 https://velog.io/@shinnh2/깃헙으로-정적-배포하기vite-gh-pages
 git subtree push --prefix dist origin gh-pages
+
+cors
+https://tori-tole.tistory.com/25
