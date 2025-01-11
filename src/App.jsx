@@ -5,23 +5,26 @@ function App(){
   const [todoList, setTodoList] = useState(null);
 
   useEffect(() => {
-    fetch("https://openapi.naver.com/v1/search/book.json?query=abc", {
-      method: "POST",
+    fetch("https://openapi.naver.com/v1/search/book.json", {
+      method: "GET",
       headers: {
-        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'X-Naver-Client-Id': 'xE7qKkqwBOh7qzHxUYvm',
         'X-Naver-Client-Secret': 'i6szQJy5Sw'
       },
 
       // &X-Naver-Client-Id=xE7qKkqwBOh7qzHxUYvm&X-Naver-Client-Secret=i6szQJy5Sw
-      // params: {
-      //   d_titl: '안녕',
-      //   // display: 10
-      // }
+      params: {
+        query: '안녕',
+        display: 10
+      }
     })
     // .then((response) => response.json())
     // .then((data) => console.log(data.docs))
-    .then((data) => setTodoList(data.docs))
+    .then((res) => setTodoList(res.docs))
+    .then(data => {
+      console.log(data.items)
+    })
     .catch(console.error);
   }, []);
   return (
