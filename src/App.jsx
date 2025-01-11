@@ -1,51 +1,49 @@
-import 'react';
+import { useEffect, useState } from "react";
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
 
 function App(){
-  async function api() {
-    const key = 'cf147d1cae44a666d1ea8c29e002eca5459906745edfb3c090ab1d974276413c';
-    const srchTarget = 'title';
-    const pageNum = '1';
-    const pageSize = '';
-    const kwd = '바보'//event.target.value;
-    await fetch("https://www.nl.go.kr/NL/search/openApi/search.do?key="+key+"&srchTarget="+srchTarget+"&pageNum="+pageNum+"&pageSize="+pageSize+"&kwd="+kwd+"&category=도서&apiType=json")
-    .then(response => response.json())
-    .then(json => console.log(json.result))
-    // .then(console.log(json.result))
-    // .then( json => console.log(json.result))
-    // .then( function aaa() {
-    //   console.log(json.result);
-    // })
-    // .then( json => return (let apiresult = [json.result]))
-    // //   const element = document.getElementById("ul"); 
-    // //   let listItem = document.createElement("li");
-    // //   listItem.textContent = 'aaa';
-    // //   element.appendChild(listItem);
-    // // })
-    // // .then( json => {
-    // //   const element = document.createElement("ul"); 
-    // //   for (const json of json.result) {
-    // //     const listItem = document.createElement("li");
-    // //     listItem.appendChild(document.createElement("strong")).textContent =
-    // //     json.titleInfo;
-    // //     listItem.append(` can be found in ${json.Location}. Cost: `);
-    // //     listItem.appendChild(document.createElement("strong")).textContent =
-    // //       `£${json.typeName}`;
-    // //       element.appendChild(listItem);
-    // //   }
-    // // })
+
+  const [todoList, setTodoList] = useState(null);
+
+  const key = 'cf147d1cae44a666d1ea8c29e002eca5459906745edfb3c090ab1d974276413c';
+  // const srchTarget = 'title';
+  const pageNum = '1';
+  const pageSize = '30';
+  const kwd = '작별하지 않는다'
+  // https://www.nl.go.kr/seoji/SearchApi.do?cert_key=cf147d1cae44a666d1ea8c29e002eca5459906745edfb3c090ab1d974276413c&result_style=json&page_no=1&page_size=30&title=바보
+  useEffect(() => {
+    fetch("https://www.nl.go.kr/seoji/SearchApi.do?cert_key="+key+"&result_style=json&page_no="+pageNum+"&page_size="+pageSize+"&title="+kwd)
+    .then((response) => response.json())
+    // .then((data) => console.log(data.docs))
+    .then((data) => setTodoList(data.docs))
     .catch(console.error);
-  }
+  }, []);
+
   return (
-    <div>
-      <input type="text" onChange={api} />
-      {/* {api.apiresult.map((item)=> (
-        <div name={item.name} price={item.price}></div>
-      ))} */}
+    <div className="App">
+      <h1>TODO LIST</h1>
+      <ul>
+        {todoList === null ? ( // todoList가 null인 경우 "Loading..."이라는 메시지를 보여주고, 그렇지 않은 경우에만 todoList를 매핑하여 표시
+          <div>Loading...</div>
+        ) : (
+          todoList.map((result) => (
+            <li key={result.EA_ISBN || result.SET_ISBN}>
+              <div className="img-wrap"><img src={result.TITLE_URL} /></div>
+              <div className="info-wrap">
+                <div dangerouslySetInnerHTML={{__html: result.EA_ISBN}}></div>
+                <div dangerouslySetInnerHTML={{__html: result.TITLE}}></div>
+                <div dangerouslySetInnerHTML={{__html: result.AUTHOR}}></div>
+                <div dangerouslySetInnerHTML={{__html: result.PUBLISHER}}></div>
+              </div>
+              
+            </li>
+          ))
+        )}
+      </ul>
     </div>
-  )
+  );
 }
 
 // const App = () => {
