@@ -3,35 +3,49 @@ import 'react';
 // import viteLogo from '/vite.svg'
 import './App.css'
 
-
 function App(){
-  async function api(event) {
+  async function api() {
     const key = 'cf147d1cae44a666d1ea8c29e002eca5459906745edfb3c090ab1d974276413c';
     const srchTarget = 'title';
     const pageNum = '1';
     const pageSize = '';
-    const kwd = event.target.value;
+    const kwd = '바보'//event.target.value;
     await fetch("https://www.nl.go.kr/NL/search/openApi/search.do?key="+key+"&srchTarget="+srchTarget+"&pageNum="+pageNum+"&pageSize="+pageSize+"&kwd="+kwd+"&category=도서&apiType=json")
-    .then((response) => response.json())
+    .then(response => response.json())
     .then(json => console.log(json.result))
-    // .then((result) => {
-    //   for (const result of data.result) {
-    //     const listItem = document.createElement("li");
-    //     listItem.appendChild(document.createElement("strong")).textContent =
-    //     result.titleInfo;
-    //     listItem.append(` can be found in ${result.Location}. Cost: `);
-    //     listItem.appendChild(document.createElement("strong")).textContent =
-    //       `£${result.typeName}`;
-    //     myList.appendChild(listItem);
-    //   }
+    // .then(console.log(json.result))
+    // .then( json => console.log(json.result))
+    // .then( function aaa() {
+    //   console.log(json.result);
     // })
+    // .then( json => return (let apiresult = [json.result]))
+    // //   const element = document.getElementById("ul"); 
+    // //   let listItem = document.createElement("li");
+    // //   listItem.textContent = 'aaa';
+    // //   element.appendChild(listItem);
+    // // })
+    // // .then( json => {
+    // //   const element = document.createElement("ul"); 
+    // //   for (const json of json.result) {
+    // //     const listItem = document.createElement("li");
+    // //     listItem.appendChild(document.createElement("strong")).textContent =
+    // //     json.titleInfo;
+    // //     listItem.append(` can be found in ${json.Location}. Cost: `);
+    // //     listItem.appendChild(document.createElement("strong")).textContent =
+    // //       `£${json.typeName}`;
+    // //       element.appendChild(listItem);
+    // //   }
+    // // })
     .catch(console.error);
   }
   return (
     <div>
-      <input type="text" onChange={api}/>
+      <input type="text" onChange={api} />
+      {/* {api.apiresult.map((item)=> (
+        <div name={item.name} price={item.price}></div>
+      ))} */}
     </div>
-    )
+  )
 }
 
 // const App = () => {
