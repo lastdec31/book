@@ -10,11 +10,18 @@ const nextConfig = {
         ];
     },
     images: {
-        remotePatterns: [{
-            protocol: 'https',
-            hostname: 'shopping-phinf.pstatic.net',
-            port: '',
-        }]
+        remotePatterns: [
+            // {
+            //     protocol: 'https',
+            //     hostname: 'shopping-phinf.pstatic.net',
+            //     port: '',
+            // },
+            {
+                protocol: 'https',
+                hostname: 'image.aladin.co.kr',
+                port: '',
+            },
+        ]
     },
 };
 // module.exports = nextConfig;
