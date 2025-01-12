@@ -5,10 +5,10 @@ import Image from "next/image";
 export default async function Home() {
 
   const TTBKey = 'ttbchichanej1435001';
-  const ItemId = '9791130654621';
+  const Query = '잘못된';
   let bbb = [];
   try {
-    const response = await axios.get('http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey='+TTBKey+'&ItemId='+ItemId+'&output=js&Version=20131101', {
+    const response = await axios.get('http://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey='+TTBKey+'&Query='+Query+'&output=js&Version=20131101', {
       headers: {
           'Content-Type': 'application/json',
       }
@@ -32,13 +32,8 @@ export default async function Home() {
               <div className="info-wrap">
                 제목 : {item.title}<br />
                 저자 : {item.author}<br />
-                쪽수 : {item.subInfo.itemPage}<br />
-                
-                {/* 판형 정보 (예: 양장본, 반양장본 등등) : {item.styleDesc}<br />
-                깊이 : {item.sizeDepth}<br />
-                세로 : {item.sizeHeight}<br />
-                가로 : {item.sizeWidth}<br /> */}
               </div>
+              
             </li>
           ))
         )}
