@@ -19,5 +19,5 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.4"
   },
-  "proxy": "https://openapi.naver.com"
+  "proxy": "http://www.aladin.co.kr"
 }
